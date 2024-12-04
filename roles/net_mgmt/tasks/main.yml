@@ -1,0 +1,32 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for net_mgmt
+- block:
+    - name: "rename the active network interface to net0"
+      replace:
+        path: "{{ netplan_path }}"
+        regexp: "{{ old_interface_name }}"
+        replace: "{{ new_interface_name }}"
+      register: replace_output
+
+    - name: "apply netplan changes"
+      command: netplan apply
+      register: netplan_apply_output
+      changed_when: false
+
+    - name: "show the result of applying netplan"
+      debug:
+        msg:
+          - "Changed : {{ replace_output.changed }}"
+          - "Command : {{ netplan_apply_output.cmd }}"
+
+    - name: "show ip link"
+      command: ip link show
+      register: ip_link_status
+      changed_when: false
+
+    - name: "ip link output"
+      debug:
+        msg: "{{ ip_link_status.stdout_lines }}"
+
+  when: ansible_default_ipv4.macaddress == known_mac_address

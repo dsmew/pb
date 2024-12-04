@@ -1,0 +1,7 @@
+#SPDX-License-Identifier: MIT-0
+---
+# vars file for net_mgmt
+known_mac_address: "02:9e:54:7c:2d:33"
+old_interface_name: "enX0"
+new_interface_name: "net0"
+netplan_path: "/etc/netplan/50-cloud-init.yaml"

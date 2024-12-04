@@ -1,0 +1,47 @@
+---
+# tasks file for disk_mgmt
+- name: "Check cryptsetup status"
+  command: "lsblk -f"
+  register: lsblk_output
+  changed_when: false
+
+- block:
+    - name: "Generate a random keyfile"
+      command: "dd if=/dev/urandom of=/root/keyfile bs=512 count=1"
+      args:
+        creates: /root/keyfile
+
+    - name: "Create LUKS partition using the keyfile"
+      command: "cryptsetup luksFormat {{ storage }} --batch-mode --key-file /root/keyfile"
+      no_log: true
+
+    - name: "Open the LUKS partition"
+      command: "cryptsetup luksOpen {{ storage }} encrypted_disk --key-file /root/keyfile"
+
+    - name: "Create a filesystem"
+      filesystem:
+        fstype: ext4
+        dev: /dev/mapper/encrypted_disk
+
+    - name: "Ensure the keyfile is securely stored"
+      file:
+        path: /root/keyfile
+        mode: "0600"
+        state: file
+
+    - name: "Mount encrypted disk"
+      mount:
+        path: /mnt/encrypted_disk
+        src: /dev/mapper/encrypted_disk
+        fstype: ext4
+        state: mounted
+  when: "'crypto_LUKS' not in lsblk_output.stdout"
+
+- name: "lsblk -f results"
+  command: "lsblk -f"
+  register: lsblk_results
+  changed_when: false
+
+- name: "show lsblk -f results"
+  debug:
+    msg: "{{ lsblk_results.stdout_lines }}"

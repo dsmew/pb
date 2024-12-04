@@ -1,0 +1,22 @@
+---
+- name: "Prepare the OS using Ansible" #Based on AWS Ubuntu VM. This playbook is not universal and could be modifed depending on sw/hw architecture of other unknown groups of servers
+  hosts: all
+  become: true
+  roles:
+    - net_mgmt
+    - disk_mgmt
+    - cpu_mgmt
+
+  tasks:
+    - name: "Gather CPUs"
+      command: lscpu
+      register: lscpu_info
+      changed_when: false
+
+    - name: "More specific list of CPUs and HT/SMT info"
+      debug:
+        msg:
+          - " {{ lscpu_info.stdout.split('\n')[4]  }}"
+          - " {{ lscpu_info.stdout.split('\n')[8]  }}"
+          - " {{ lscpu_info.stdout.split('\n')[13] }}"
+          - " {{ lscpu_info.stdout.split('\n')[14] }}"
