@@ -7,7 +7,7 @@
     - disk_mgmt
     - cpu_mgmt
 
-  tasks:
+  post_tasks:
     - name: "Gather CPUs"
       command: lscpu
       register: lscpu_info

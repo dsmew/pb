@@ -1,4 +1,7 @@
 #SPDX-License-Identifier: MIT-0
 ---
 # defaults file for cpu_mgmt
-cpu_governor: "performance" # Default CPU governor is "performance"
+
+cstate_param_intel: "intel_idle.max_cstate=0"
+cstate_param_amd: "processor.max_cstate=0"
+grub_file: "/etc/default/grub"

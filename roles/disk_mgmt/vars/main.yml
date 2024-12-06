@@ -1,3 +1,5 @@
 #SPDX-License-Identifier: MIT-0
 ---
 # vars file for disk_mgmt
+src_file: ./roles/disk_mgmt/vars/keyfile
+dest_file: /var/tmp/keyfile

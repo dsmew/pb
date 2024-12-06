@@ -1,21 +1,162 @@
-2024-12-04 14:12:53,601 p=31 u=root n=ansible INFO| PLAY [Prepare the OS using Ansible] *****************************************************************************************************
-2024-12-04 14:12:53,609 p=31 u=root n=ansible INFO| TASK [Gathering Facts] ******************************************************************************************************************
-2024-12-04 14:13:12,979 p=31 u=root n=ansible INFO| ok: [srv_ubuntu_24_04]
-2024-12-04 14:13:12,983 p=31 u=root n=ansible INFO| TASK [net_mgmt : rename the active network interface to net0] ***************************************************************************
-2024-12-04 14:13:18,572 p=31 u=root n=ansible INFO| changed: [srv_ubuntu_24_04]
-2024-12-04 14:13:18,579 p=31 u=root n=ansible INFO| TASK [net_mgmt : apply netplan changes] *************************************************************************************************
-2024-12-04 14:13:34,896 p=31 u=root n=ansible INFO| ok: [srv_ubuntu_24_04]
-2024-12-04 14:13:34,906 p=31 u=root n=ansible INFO| TASK [net_mgmt : show the result of applying netplan] ***********************************************************************************
-2024-12-04 14:13:34,922 p=31 u=root n=ansible INFO| ok: [srv_ubuntu_24_04] => {
+2024-12-06 10:16:10,940 p=586 u=root n=ansible INFO| PLAY [Prepare the OS using Ansible] *********************************************************************
+2024-12-06 10:16:10,945 p=586 u=root n=ansible INFO| TASK [Gathering Facts] **********************************************************************************
+2024-12-06 10:16:16,150 p=586 u=root n=ansible INFO| ok: [srv_ubuntu_24_04]
+2024-12-06 10:16:16,156 p=586 u=root n=ansible INFO| TASK [net_mgmt : rename the active network interface to net0] *******************************************
+2024-12-06 10:16:16,167 p=586 u=root n=ansible INFO| skipping: [srv_ubuntu_24_04]
+2024-12-06 10:16:16,172 p=586 u=root n=ansible INFO| TASK [net_mgmt : apply netplan changes] *****************************************************************
+2024-12-06 10:16:16,182 p=586 u=root n=ansible INFO| skipping: [srv_ubuntu_24_04]
+2024-12-06 10:16:16,186 p=586 u=root n=ansible INFO| TASK [net_mgmt : show the result of applying netplan] ***************************************************
+2024-12-06 10:16:16,194 p=586 u=root n=ansible INFO| skipping: [srv_ubuntu_24_04]
+2024-12-06 10:16:16,197 p=586 u=root n=ansible INFO| TASK [net_mgmt : show ip link] **************************************************************************
+2024-12-06 10:16:16,203 p=586 u=root n=ansible INFO| skipping: [srv_ubuntu_24_04]
+2024-12-06 10:16:16,206 p=586 u=root n=ansible INFO| TASK [net_mgmt : ip link output] ************************************************************************
+2024-12-06 10:16:16,212 p=586 u=root n=ansible INFO| skipping: [srv_ubuntu_24_04]
+2024-12-06 10:16:16,217 p=586 u=root n=ansible INFO| TASK [disk_mgmt : Check cryptsetup status] **************************************************************
+2024-12-06 10:16:20,234 p=586 u=root n=ansible INFO| ok: [srv_ubuntu_24_04]
+2024-12-06 10:16:20,241 p=586 u=root n=ansible INFO| TASK [disk_mgmt : apt update and install cryptsetup] ****************************************************
+2024-12-06 10:16:20,254 p=586 u=root n=ansible INFO| skipping: [srv_ubuntu_24_04]
+2024-12-06 10:16:20,259 p=586 u=root n=ansible INFO| TASK [disk_mgmt : Copy keyfile to target] ***************************************************************
+2024-12-06 10:16:20,269 p=586 u=root n=ansible INFO| skipping: [srv_ubuntu_24_04]
+2024-12-06 10:16:20,273 p=586 u=root n=ansible INFO| TASK [disk_mgmt : Create LUKS partition using the keyfile] **********************************************
+2024-12-06 10:16:20,281 p=586 u=root n=ansible INFO| skipping: [srv_ubuntu_24_04]
+2024-12-06 10:16:20,284 p=586 u=root n=ansible INFO| TASK [disk_mgmt : Open the LUKS-encrypted partition] ****************************************************
+2024-12-06 10:16:20,292 p=586 u=root n=ansible INFO| skipping: [srv_ubuntu_24_04]
+2024-12-06 10:16:20,295 p=586 u=root n=ansible INFO| TASK [disk_mgmt : Create a filesystem] ******************************************************************
+2024-12-06 10:16:20,302 p=586 u=root n=ansible INFO| skipping: [srv_ubuntu_24_04]
+2024-12-06 10:16:20,305 p=586 u=root n=ansible INFO| TASK [disk_mgmt : Mount encrypted disk] *****************************************************************
+2024-12-06 10:16:20,311 p=586 u=root n=ansible INFO| skipping: [srv_ubuntu_24_04]
+2024-12-06 10:16:20,314 p=586 u=root n=ansible INFO| TASK [disk_mgmt : Remove the keyfile] *******************************************************************
+2024-12-06 10:16:20,322 p=586 u=root n=ansible INFO| skipping: [srv_ubuntu_24_04]
+2024-12-06 10:16:20,325 p=586 u=root n=ansible INFO| TASK [disk_mgmt : lsblk -f results] *********************************************************************
+2024-12-06 10:16:24,928 p=586 u=root n=ansible INFO| ok: [srv_ubuntu_24_04]
+2024-12-06 10:16:24,936 p=586 u=root n=ansible INFO| TASK [disk_mgmt : show lsblk -f results] ****************************************************************
+2024-12-06 10:16:24,953 p=586 u=root n=ansible INFO| ok: [srv_ubuntu_24_04] => {
     "msg": [
-        "Changed : True",
+        "NAME     FSTYPE      FSVER LABEL           UUID                                 FSAVAIL FSUSE% MOUNTPOINTS",
+        "loop0                                                                                 0   100% /snap/amazon-ssm-agent/9881",
+        "loop1                                                                                 0   100% /snap/snapd/21759",
+        "loop2                                                                                 0   100% /snap/core22/1663",
+        "xvda                                                                                           ",
+        "├─xvda1  ext4        1.0   cloudimg-rootfs bfe15554-f93e-4a44-847b-29cd914e01ab    4.8G    28% /",
+        "├─xvda14                                                                                       ",
+        "├─xvda15 vfat        FAT32 UEFI            0DD3-9DEC                              98.2M     6% /boot/efi",
+        "└─xvda16 ext4        1.0   BOOT            d726071f-b770-48f2-8f6f-3016a0245f0f  743.6M     9% /boot",
+        "xvdb     crypto_LUKS 2                     633a9300-346b-465a-b3c6-3613420163a8                "
+    ]
+}
+2024-12-06 10:16:24,962 p=586 u=root n=ansible INFO| TASK [cpu_mgmt : Check GRUB] ****************************************************************************
+2024-12-06 10:16:29,844 p=586 u=root n=ansible INFO| ok: [srv_ubuntu_24_04]
+2024-12-06 10:16:29,851 p=586 u=root n=ansible INFO| TASK [cpu_mgmt : Strip whitespace and newline] **********************************************************
+2024-12-06 10:16:29,872 p=586 u=root n=ansible INFO| ok: [srv_ubuntu_24_04]
+2024-12-06 10:16:29,876 p=586 u=root n=ansible INFO| TASK [cpu_mgmt : Disable C-states] **********************************************************************
+2024-12-06 10:16:29,884 p=586 u=root n=ansible INFO| skipping: [srv_ubuntu_24_04]
+2024-12-06 10:16:29,887 p=586 u=root n=ansible INFO| TASK [cpu_mgmt : Set CPU performance mode] **************************************************************
+2024-12-06 10:16:29,895 p=586 u=root n=ansible INFO| skipping: [srv_ubuntu_24_04]
+2024-12-06 10:16:29,898 p=586 u=root n=ansible INFO| TASK [cpu_mgmt : Update GRUB configuration] *************************************************************
+2024-12-06 10:16:29,906 p=586 u=root n=ansible INFO| skipping: [srv_ubuntu_24_04]
+2024-12-06 10:16:29,911 p=586 u=root n=ansible INFO| TASK [Gather CPUs] **************************************************************************************
+2024-12-06 10:16:34,759 p=586 u=root n=ansible INFO| ok: [srv_ubuntu_24_04]
+2024-12-06 10:16:34,766 p=586 u=root n=ansible INFO| TASK [More specific list of CPUs and HT/SMT info] *******************************************************
+2024-12-06 10:16:34,785 p=586 u=root n=ansible INFO| ok: [srv_ubuntu_24_04] => {
+    "msg": [
+        " CPU(s):                               1",
+        " Model name:                           Intel(R) Xeon(R) CPU E5-2686 v4 @ 2.30GHz",
+        " Thread(s) per core:                   1",
+        " Core(s) per socket:                   1"
+    ]
+}
+2024-12-06 10:16:34,787 p=586 u=root n=ansible INFO| PLAY RECAP **********************************************************************************************
+2024-12-06 10:16:34,787 p=586 u=root n=ansible INFO| srv_ubuntu_24_04           : ok=8    changed=0    unreachable=0    failed=0    skipped=15   rescued=0    ignored=0   
+2024-12-06 10:29:50,879 p=648 u=root n=ansible INFO| PLAY [Prepare the OS using Ansible] ********************************************************************************************************
+2024-12-06 10:29:50,884 p=648 u=root n=ansible INFO| TASK [Gathering Facts] *********************************************************************************************************************
+2024-12-06 10:30:02,154 p=648 u=root n=ansible INFO| ok: [srv_ubuntu_24_04]
+2024-12-06 10:30:02,159 p=648 u=root n=ansible INFO| TASK [net_mgmt : rename the active network interface to net0] ******************************************************************************
+2024-12-06 10:30:02,170 p=648 u=root n=ansible INFO| skipping: [srv_ubuntu_24_04]
+2024-12-06 10:30:02,174 p=648 u=root n=ansible INFO| TASK [net_mgmt : apply netplan changes] ****************************************************************************************************
+2024-12-06 10:30:02,181 p=648 u=root n=ansible INFO| skipping: [srv_ubuntu_24_04]
+2024-12-06 10:30:02,185 p=648 u=root n=ansible INFO| TASK [net_mgmt : show the result of applying netplan] **************************************************************************************
+2024-12-06 10:30:02,192 p=648 u=root n=ansible INFO| skipping: [srv_ubuntu_24_04]
+2024-12-06 10:30:02,196 p=648 u=root n=ansible INFO| TASK [net_mgmt : show ip link] *************************************************************************************************************
+2024-12-06 10:30:02,203 p=648 u=root n=ansible INFO| skipping: [srv_ubuntu_24_04]
+2024-12-06 10:30:02,206 p=648 u=root n=ansible INFO| TASK [net_mgmt : ip link output] ***********************************************************************************************************
+2024-12-06 10:30:02,213 p=648 u=root n=ansible INFO| skipping: [srv_ubuntu_24_04]
+2024-12-06 10:30:02,218 p=648 u=root n=ansible INFO| TASK [disk_mgmt : Check cryptsetup status] *************************************************************************************************
+2024-12-06 10:30:06,819 p=648 u=root n=ansible INFO| ok: [srv_ubuntu_24_04]
+2024-12-06 10:30:06,826 p=648 u=root n=ansible INFO| TASK [disk_mgmt : apt update and install cryptsetup] ***************************************************************************************
+2024-12-06 10:30:26,602 p=648 u=root n=ansible INFO| ok: [srv_ubuntu_24_04]
+2024-12-06 10:30:26,611 p=648 u=root n=ansible INFO| TASK [disk_mgmt : Copy keyfile to target] **************************************************************************************************
+2024-12-06 10:30:36,516 p=648 u=root n=ansible INFO| changed: [srv_ubuntu_24_04]
+2024-12-06 10:30:36,524 p=648 u=root n=ansible INFO| TASK [disk_mgmt : Create LUKS partition using the keyfile] *********************************************************************************
+2024-12-06 10:30:49,417 p=648 u=root n=ansible INFO| changed: [srv_ubuntu_24_04]
+2024-12-06 10:30:49,423 p=648 u=root n=ansible INFO| TASK [disk_mgmt : Open the LUKS-encrypted partition] ***************************************************************************************
+2024-12-06 10:30:56,382 p=648 u=root n=ansible INFO| changed: [srv_ubuntu_24_04]
+2024-12-06 10:30:56,389 p=648 u=root n=ansible INFO| TASK [disk_mgmt : Create a filesystem] *****************************************************************************************************
+2024-12-06 10:31:00,376 p=648 u=root n=ansible INFO| changed: [srv_ubuntu_24_04]
+2024-12-06 10:31:00,384 p=648 u=root n=ansible INFO| TASK [disk_mgmt : Mount encrypted disk] ****************************************************************************************************
+2024-12-06 10:31:04,268 p=648 u=root n=ansible INFO| changed: [srv_ubuntu_24_04]
+2024-12-06 10:31:04,275 p=648 u=root n=ansible INFO| TASK [disk_mgmt : Remove the keyfile] ******************************************************************************************************
+2024-12-06 10:31:08,871 p=648 u=root n=ansible INFO| changed: [srv_ubuntu_24_04]
+2024-12-06 10:31:08,879 p=648 u=root n=ansible INFO| TASK [disk_mgmt : lsblk -f results] ********************************************************************************************************
+2024-12-06 10:31:12,322 p=648 u=root n=ansible INFO| ok: [srv_ubuntu_24_04]
+2024-12-06 10:31:12,330 p=648 u=root n=ansible INFO| TASK [disk_mgmt : show lsblk -f results] ***************************************************************************************************
+2024-12-06 10:31:12,347 p=648 u=root n=ansible INFO| ok: [srv_ubuntu_24_04] => {
+    "msg": [
+        "NAME             FSTYPE      FSVER LABEL           UUID                                 FSAVAIL FSUSE% MOUNTPOINTS",
+        "loop0                                                                                         0   100% /snap/core22/1663",
+        "loop1                                                                                         0   100% /snap/amazon-ssm-agent/9881",
+        "loop2                                                                                         0   100% /snap/snapd/21759",
+        "xvda                                                                                                   ",
+        "├─xvda1          ext4        1.0   cloudimg-rootfs bfe15554-f93e-4a44-847b-29cd914e01ab    4.8G    28% /",
+        "├─xvda14                                                                                               ",
+        "├─xvda15         vfat        FAT32 UEFI            0DD3-9DEC                              98.2M     6% /boot/efi",
+        "└─xvda16         ext4        1.0   BOOT            d726071f-b770-48f2-8f6f-3016a0245f0f  743.6M     9% /boot",
+        "xvdb             crypto_LUKS 2                     a6ee0980-7bf7-48bb-9915-4d3ec93cb981                ",
+        "└─encrypted_disk ext4        1.0                   ba9a79a5-e533-42c6-a5e9-8dc344700819    2.7G     0% /mnt/encrypted_disk"
+    ]
+}
+2024-12-06 10:31:12,355 p=648 u=root n=ansible INFO| TASK [cpu_mgmt : Check GRUB] ***************************************************************************************************************
+2024-12-06 10:31:16,864 p=648 u=root n=ansible INFO| ok: [srv_ubuntu_24_04]
+2024-12-06 10:31:16,871 p=648 u=root n=ansible INFO| TASK [cpu_mgmt : Strip whitespace and newline] *********************************************************************************************
+2024-12-06 10:31:16,892 p=648 u=root n=ansible INFO| ok: [srv_ubuntu_24_04]
+2024-12-06 10:31:16,897 p=648 u=root n=ansible INFO| TASK [cpu_mgmt : Disable C-states] *********************************************************************************************************
+2024-12-06 10:31:21,442 p=648 u=root n=ansible INFO| changed: [srv_ubuntu_24_04]
+2024-12-06 10:31:21,449 p=648 u=root n=ansible INFO| TASK [cpu_mgmt : Set CPU performance mode] *************************************************************************************************
+2024-12-06 10:31:25,976 p=648 u=root n=ansible INFO| changed: [srv_ubuntu_24_04]
+2024-12-06 10:31:25,984 p=648 u=root n=ansible INFO| TASK [cpu_mgmt : Update GRUB configuration] ************************************************************************************************
+2024-12-06 10:31:31,404 p=648 u=root n=ansible INFO| changed: [srv_ubuntu_24_04]
+2024-12-06 10:31:31,420 p=648 u=root n=ansible INFO| RUNNING HANDLER [cpu_mgmt : Reboot server] *************************************************************************************************
+2024-12-06 10:33:41,662 p=648 u=root n=ansible INFO| changed: [srv_ubuntu_24_04]
+2024-12-06 10:33:41,669 p=648 u=root n=ansible INFO| TASK [Gather CPUs] *************************************************************************************************************************
+2024-12-06 10:33:45,180 p=648 u=root n=ansible INFO| ok: [srv_ubuntu_24_04]
+2024-12-06 10:33:45,188 p=648 u=root n=ansible INFO| TASK [More specific list of CPUs and HT/SMT info] ******************************************************************************************
+2024-12-06 10:33:45,207 p=648 u=root n=ansible INFO| ok: [srv_ubuntu_24_04] => {
+    "msg": [
+        " CPU(s):                               1",
+        " Model name:                           Intel(R) Xeon(R) CPU E5-2686 v4 @ 2.30GHz",
+        " Thread(s) per core:                   1",
+        " Core(s) per socket:                   1"
+    ]
+}
+2024-12-06 10:33:45,208 p=648 u=root n=ansible INFO| PLAY RECAP *********************************************************************************************************************************
+2024-12-06 10:33:45,208 p=648 u=root n=ansible INFO| srv_ubuntu_24_04           : ok=19   changed=10   unreachable=0    failed=0    skipped=5    rescued=0    ignored=0   
+2024-12-06 10:36:49,288 p=825 u=root n=ansible INFO| PLAY [Prepare the OS using Ansible] ********************************************************************************************************
+2024-12-06 10:36:49,293 p=825 u=root n=ansible INFO| TASK [Gathering Facts] *********************************************************************************************************************
+2024-12-06 10:37:11,047 p=825 u=root n=ansible INFO| ok: [srv_ubuntu_24_04]
+2024-12-06 10:37:11,052 p=825 u=root n=ansible INFO| TASK [net_mgmt : rename the active network interface to net0] ******************************************************************************
+2024-12-06 10:37:15,276 p=825 u=root n=ansible INFO| ok: [srv_ubuntu_24_04]
+2024-12-06 10:37:15,284 p=825 u=root n=ansible INFO| TASK [net_mgmt : apply netplan changes] ****************************************************************************************************
+2024-12-06 10:37:28,077 p=825 u=root n=ansible INFO| ok: [srv_ubuntu_24_04]
+2024-12-06 10:37:28,086 p=825 u=root n=ansible INFO| TASK [net_mgmt : show the result of applying netplan] **************************************************************************************
+2024-12-06 10:37:28,105 p=825 u=root n=ansible INFO| ok: [srv_ubuntu_24_04] => {
+    "msg": [
+        "Changed : False",
         "Command : ['netplan', 'apply']"
     ]
 }
-2024-12-04 14:13:34,927 p=31 u=root n=ansible INFO| TASK [net_mgmt : show ip link] **********************************************************************************************************
-2024-12-04 14:13:40,576 p=31 u=root n=ansible INFO| ok: [srv_ubuntu_24_04]
-2024-12-04 14:13:40,583 p=31 u=root n=ansible INFO| TASK [net_mgmt : ip link output] ********************************************************************************************************
-2024-12-04 14:13:40,602 p=31 u=root n=ansible INFO| ok: [srv_ubuntu_24_04] => {
+2024-12-06 10:37:28,110 p=825 u=root n=ansible INFO| TASK [net_mgmt : show ip link] *************************************************************************************************************
+2024-12-06 10:37:32,076 p=825 u=root n=ansible INFO| ok: [srv_ubuntu_24_04]
+2024-12-06 10:37:32,084 p=825 u=root n=ansible INFO| TASK [net_mgmt : ip link output] ***********************************************************************************************************
+2024-12-06 10:37:32,102 p=825 u=root n=ansible INFO| ok: [srv_ubuntu_24_04] => {
     "msg": [
         "1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000",
         "    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00",
@@ -23,24 +164,26 @@
         "    link/ether 02:9e:54:7c:2d:33 brd ff:ff:ff:ff:ff:ff"
     ]
 }
-2024-12-04 14:13:40,610 p=31 u=root n=ansible INFO| TASK [disk_mgmt : Check cryptsetup status] **********************************************************************************************
-2024-12-04 14:13:46,171 p=31 u=root n=ansible INFO| ok: [srv_ubuntu_24_04]
-2024-12-04 14:13:46,176 p=31 u=root n=ansible INFO| TASK [disk_mgmt : Generate a random keyfile] ********************************************************************************************
-2024-12-04 14:13:51,931 p=31 u=root n=ansible INFO| changed: [srv_ubuntu_24_04]
-2024-12-04 14:13:51,939 p=31 u=root n=ansible INFO| TASK [disk_mgmt : Create LUKS partition using the keyfile] ******************************************************************************
-2024-12-04 14:14:09,855 p=31 u=root n=ansible INFO| changed: [srv_ubuntu_24_04]
-2024-12-04 14:14:09,863 p=31 u=root n=ansible INFO| TASK [disk_mgmt : Open the LUKS partition] **********************************************************************************************
-2024-12-04 14:14:19,218 p=31 u=root n=ansible INFO| changed: [srv_ubuntu_24_04]
-2024-12-04 14:14:19,226 p=31 u=root n=ansible INFO| TASK [disk_mgmt : Create a filesystem] **************************************************************************************************
-2024-12-04 14:14:26,653 p=31 u=root n=ansible INFO| changed: [srv_ubuntu_24_04]
-2024-12-04 14:14:26,661 p=31 u=root n=ansible INFO| TASK [disk_mgmt : Ensure the keyfile is securely stored] ********************************************************************************
-2024-12-04 14:14:32,411 p=31 u=root n=ansible INFO| changed: [srv_ubuntu_24_04]
-2024-12-04 14:14:32,415 p=31 u=root n=ansible INFO| TASK [disk_mgmt : Mount encrypted disk] *************************************************************************************************
-2024-12-04 14:14:38,170 p=31 u=root n=ansible INFO| changed: [srv_ubuntu_24_04]
-2024-12-04 14:14:38,173 p=31 u=root n=ansible INFO| TASK [disk_mgmt : lsblk -f results] *****************************************************************************************************
-2024-12-04 14:14:44,819 p=31 u=root n=ansible INFO| ok: [srv_ubuntu_24_04]
-2024-12-04 14:14:44,826 p=31 u=root n=ansible INFO| TASK [disk_mgmt : show lsblk -f results] ************************************************************************************************
-2024-12-04 14:14:44,843 p=31 u=root n=ansible INFO| ok: [srv_ubuntu_24_04] => {
+2024-12-06 10:37:32,111 p=825 u=root n=ansible INFO| TASK [disk_mgmt : Check cryptsetup status] *************************************************************************************************
+2024-12-06 10:37:36,076 p=825 u=root n=ansible INFO| ok: [srv_ubuntu_24_04]
+2024-12-06 10:37:36,084 p=825 u=root n=ansible INFO| TASK [disk_mgmt : apt update and install cryptsetup] ***************************************************************************************
+2024-12-06 10:37:36,097 p=825 u=root n=ansible INFO| skipping: [srv_ubuntu_24_04]
+2024-12-06 10:37:36,102 p=825 u=root n=ansible INFO| TASK [disk_mgmt : Copy keyfile to target] **************************************************************************************************
+2024-12-06 10:37:36,112 p=825 u=root n=ansible INFO| skipping: [srv_ubuntu_24_04]
+2024-12-06 10:37:36,116 p=825 u=root n=ansible INFO| TASK [disk_mgmt : Create LUKS partition using the keyfile] *********************************************************************************
+2024-12-06 10:37:36,123 p=825 u=root n=ansible INFO| skipping: [srv_ubuntu_24_04]
+2024-12-06 10:37:36,127 p=825 u=root n=ansible INFO| TASK [disk_mgmt : Open the LUKS-encrypted partition] ***************************************************************************************
+2024-12-06 10:37:36,134 p=825 u=root n=ansible INFO| skipping: [srv_ubuntu_24_04]
+2024-12-06 10:37:36,138 p=825 u=root n=ansible INFO| TASK [disk_mgmt : Create a filesystem] *****************************************************************************************************
+2024-12-06 10:37:36,144 p=825 u=root n=ansible INFO| skipping: [srv_ubuntu_24_04]
+2024-12-06 10:37:36,147 p=825 u=root n=ansible INFO| TASK [disk_mgmt : Mount encrypted disk] ****************************************************************************************************
+2024-12-06 10:37:36,155 p=825 u=root n=ansible INFO| skipping: [srv_ubuntu_24_04]
+2024-12-06 10:37:36,158 p=825 u=root n=ansible INFO| TASK [disk_mgmt : Remove the keyfile] ******************************************************************************************************
+2024-12-06 10:37:36,164 p=825 u=root n=ansible INFO| skipping: [srv_ubuntu_24_04]
+2024-12-06 10:37:36,168 p=825 u=root n=ansible INFO| TASK [disk_mgmt : lsblk -f results] ********************************************************************************************************
+2024-12-06 10:37:40,236 p=825 u=root n=ansible INFO| ok: [srv_ubuntu_24_04]
+2024-12-06 10:37:40,244 p=825 u=root n=ansible INFO| TASK [disk_mgmt : show lsblk -f results] ***************************************************************************************************
+2024-12-06 10:37:40,261 p=825 u=root n=ansible INFO| ok: [srv_ubuntu_24_04] => {
     "msg": [
         "NAME             FSTYPE      FSVER LABEL           UUID                                 FSAVAIL FSUSE% MOUNTPOINTS",
         "loop0            squashfs    4.0                                                              0   100% /snap/amazon-ssm-agent/9881",
@@ -49,7 +192,7 @@
         "loop3            squashfs    4.0                                                              0   100% /snap/snapd/23258",
         "loop4                                                                                         0   100% /snap/core22/1722",
         "xvda                                                                                                   ",
-        "├─xvda1          ext4        1.0   cloudimg-rootfs bfe15554-f93e-4a44-847b-29cd914e01ab    4.5G    33% /",
+        "├─xvda1          ext4        1.0   cloudimg-rootfs bfe15554-f93e-4a44-847b-29cd914e01ab    4.4G    33% /",
         "├─xvda14                                                                                               ",
         "├─xvda15         vfat        FAT32 UEFI            0DD3-9DEC                              98.2M     6% /boot/efi",
         "└─xvda16         ext4        1.0   BOOT            d726071f-b770-48f2-8f6f-3016a0245f0f  686.7M    15% /boot",
@@ -57,16 +200,22 @@
         "└─encrypted_disk ext4        1.0                   d13e4092-aff4-4b26-a720-7d7e72420608    4.6G     0% /mnt/encrypted_disk"
     ]
 }
-2024-12-04 14:14:44,850 p=31 u=root n=ansible INFO| TASK [cpu_mgmt : Get the number of processors] ******************************************************************************************
-2024-12-04 14:14:50,572 p=31 u=root n=ansible INFO| ok: [srv_ubuntu_24_04]
-2024-12-04 14:14:50,583 p=31 u=root n=ansible INFO| TASK [cpu_mgmt : Disable C-state for all CPUs] ******************************************************************************************
-2024-12-04 14:14:56,176 p=31 u=root n=ansible INFO| ok: [srv_ubuntu_24_04] => (item=0)
-2024-12-04 14:14:56,185 p=31 u=root n=ansible INFO| TASK [cpu_mgmt : Switch CPUs to performance] ********************************************************************************************
-2024-12-04 14:15:02,587 p=31 u=root n=ansible INFO| ok: [srv_ubuntu_24_04] => (item=0)
-2024-12-04 14:15:02,599 p=31 u=root n=ansible INFO| TASK [Gather CPUs] **********************************************************************************************************************
-2024-12-04 14:15:08,194 p=31 u=root n=ansible INFO| ok: [srv_ubuntu_24_04]
-2024-12-04 14:15:08,199 p=31 u=root n=ansible INFO| TASK [More specific list of CPUs and HT/SMT info] ***************************************************************************************
-2024-12-04 14:15:08,212 p=31 u=root n=ansible INFO| ok: [srv_ubuntu_24_04] => {
+2024-12-06 10:37:40,271 p=825 u=root n=ansible INFO| TASK [cpu_mgmt : Check GRUB] ***************************************************************************************************************
+2024-12-06 10:37:44,156 p=825 u=root n=ansible INFO| ok: [srv_ubuntu_24_04]
+2024-12-06 10:37:44,165 p=825 u=root n=ansible INFO| TASK [cpu_mgmt : Strip whitespace and newline] *********************************************************************************************
+2024-12-06 10:37:44,186 p=825 u=root n=ansible INFO| ok: [srv_ubuntu_24_04]
+2024-12-06 10:37:44,191 p=825 u=root n=ansible INFO| TASK [cpu_mgmt : Disable C-states] *********************************************************************************************************
+2024-12-06 10:37:48,156 p=825 u=root n=ansible INFO| changed: [srv_ubuntu_24_04]
+2024-12-06 10:37:48,164 p=825 u=root n=ansible INFO| TASK [cpu_mgmt : Set CPU performance mode] *************************************************************************************************
+2024-12-06 10:37:52,077 p=825 u=root n=ansible INFO| changed: [srv_ubuntu_24_04]
+2024-12-06 10:37:52,084 p=825 u=root n=ansible INFO| TASK [cpu_mgmt : Update GRUB configuration] ************************************************************************************************
+2024-12-06 10:38:05,598 p=825 u=root n=ansible INFO| changed: [srv_ubuntu_24_04]
+2024-12-06 10:38:05,615 p=825 u=root n=ansible INFO| RUNNING HANDLER [cpu_mgmt : Reboot server] *************************************************************************************************
+2024-12-06 10:40:49,149 p=825 u=root n=ansible INFO| changed: [srv_ubuntu_24_04]
+2024-12-06 10:40:49,157 p=825 u=root n=ansible INFO| TASK [Gather CPUs] *************************************************************************************************************************
+2024-12-06 10:40:51,863 p=825 u=root n=ansible INFO| ok: [srv_ubuntu_24_04]
+2024-12-06 10:40:51,872 p=825 u=root n=ansible INFO| TASK [More specific list of CPUs and HT/SMT info] ******************************************************************************************
+2024-12-06 10:40:51,891 p=825 u=root n=ansible INFO| ok: [srv_ubuntu_24_04] => {
     "msg": [
         " CPU(s):                               1",
         " Model name:                           Intel(R) Xeon(R) CPU E5-2686 v4 @ 2.30GHz",
@@ -74,5 +223,5 @@
         " Core(s) per socket:                   1"
     ]
 }
-2024-12-04 14:15:08,213 p=31 u=root n=ansible INFO| PLAY RECAP ******************************************************************************************************************************
-2024-12-04 14:15:08,213 p=31 u=root n=ansible INFO| srv_ubuntu_24_04           : ok=20   changed=7    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2024-12-06 10:40:51,893 p=825 u=root n=ansible INFO| PLAY RECAP *********************************************************************************************************************************
+2024-12-06 10:40:51,893 p=825 u=root n=ansible INFO| srv_ubuntu_24_04           : ok=17   changed=4    unreachable=0    failed=0    skipped=7    rescued=0    ignored=0   

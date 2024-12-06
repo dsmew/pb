@@ -1,3 +1,5 @@
-#SPDX-License-Identifier: MIT-0
 ---
-# handlers file for cpu_mgmt
+- name: Reboot server
+  reboot:
+    reboot_timeout: 300
+    test_command: uptime

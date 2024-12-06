@@ -6,28 +6,28 @@
   changed_when: false
 
 - block:
-    - name: "Generate a random keyfile"
-      command: "dd if=/dev/urandom of=/root/keyfile bs=512 count=1"
-      args:
-        creates: /root/keyfile
+    - name: "apt update and install cryptsetup"
+      apt:
+        update_cache: yes
+        name: cryptsetup
+        state: present
+
+    - name: "Copy keyfile to target"
+      copy:
+        src: "{{ src_file }}"
+        dest: "{{ dest_file }}"
+        mode: "0600"
 
     - name: "Create LUKS partition using the keyfile"
-      command: "cryptsetup luksFormat {{ storage }} --batch-mode --key-file /root/keyfile"
-      no_log: true
+      command: "cryptsetup luksFormat {{ storage }} --batch-mode --key-file {{ dest_file }}"
 
-    - name: "Open the LUKS partition"
-      command: "cryptsetup luksOpen {{ storage }} encrypted_disk --key-file /root/keyfile"
+    - name: "Open the LUKS-encrypted partition"
+      command: cryptsetup luksOpen {{ storage }} encrypted_disk --key-file {{ dest_file }}
 
     - name: "Create a filesystem"
       filesystem:
         fstype: ext4
         dev: /dev/mapper/encrypted_disk
-
-    - name: "Ensure the keyfile is securely stored"
-      file:
-        path: /root/keyfile
-        mode: "0600"
-        state: file
 
     - name: "Mount encrypted disk"
       mount:
@@ -35,6 +35,11 @@
         src: /dev/mapper/encrypted_disk
         fstype: ext4
         state: mounted
+
+    - name: "Remove the keyfile"
+      ansible.builtin.file:
+        path: "{{ dest_file }}"
+        state: absent
   when: "'crypto_LUKS' not in lsblk_output.stdout"
 
 - name: "lsblk -f results"

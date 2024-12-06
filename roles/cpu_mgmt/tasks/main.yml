@@ -1,14 +1,30 @@
-- name: "Get the number of processors"
-  command: nproc
-  register: cpu_count
+---
+# tasks file for disable_cstates
+- name: "Check GRUB"
+  command: grep '^GRUB_CMDLINE_LINUX_DEFAULT' /etc/default/grub
+  register: grub_line
   changed_when: false
 
-- name: "Disable C-state for all CPUs"
-  command: echo "0" > /sys/devices/system/cpu/cpu{{ item }}/cpuidle/state1/disable
-  loop: "{{ range(0, cpu_count.stdout | int) | list }}"
-  changed_when: false
+- name: "Strip whitespace and newline"
+  set_fact:
+    grub_line_trimmed: "{{ grub_line.stdout | trim }}"
 
-- name: "Switch CPUs to performance"
-  command: "echo performance > /sys/devices/system/cpu/cpu{{ item }}/cpufreq/scaling_governor"
-  loop: "{{ range(0, cpu_count.stdout | int) | list }}"
-  changed_when: false
+- block:
+    - name: "Disable C-states"
+      lineinfile:
+        path: "/etc/default/grub"
+        regexp: "^GRUB_CMDLINE_LINUX_DEFAULT"
+        line: 'GRUB_CMDLINE_LINUX_DEFAULT="quiet splash intel_idle.max_cstate=0 processor.max_cstate=0"'
+
+    - name: "Set CPU performance mode"
+      lineinfile:
+        path: /etc/default/grub
+        regexp: "^GRUB_CMDLINE_LINUX_DEFAULT"
+        line: 'GRUB_CMDLINE_LINUX_DEFAULT="quiet splash intel_pstate=enable intel_pstate.max_perf_pct=100 intel_pstate.min_perf_pct=100 cpufreq.default_governor=performance"'
+
+    - name: "Update GRUB configuration"
+      command: update-grub
+  when:
+    - (grub_line_trimmed != 'GRUB_CMDLINE_LINUX_DEFAULT="quiet splash intel_idle.max_cstate=0 processor.max_cstate=0"')
+    - (grub_line_trimmed != 'GRUB_CMDLINE_LINUX_DEFAULT="quiet splash intel_pstate=enable intel_pstate.max_perf_pct=100 intel_pstate.min_perf_pct=100 cpufreq.default_governor=performance"')
+  notify: Reboot server

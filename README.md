@@ -1,3 +1,5 @@
+ansible-playbook playbook.yml --ask-vault-pass
+
 playbook.yml
 
 The playbook's yml content and what each line does

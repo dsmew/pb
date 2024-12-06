@@ -1,7 +1,13 @@
 This role is designed to optimize the CPU performance on Linux
 
-Line 1-4 Runs the nproc command which returns the number of CPU and store the result
+Lines 3-6 Run grep command to search the line and save in variable grub_line
 
-Line 6-9 Prevent all CPUs from entering to the idle state 
+Lines 8-10 Trim whitespace and newline characters
 
-Line 11-14 The loop will run for each CPU executing the command to set its governor to "performance"
+Lines 13-23 Disable C-states and set CPU to perfomance mode 
+
+Line 25-26 Apply GRUB configuration changes 
+
+Line 27-29 Conditions for any changes
+
+Line 30 Notify handlers to reboot server when the configuration is changed 
